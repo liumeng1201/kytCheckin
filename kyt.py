@@ -1,14 +1,13 @@
 from urllib import request, parse
 
-cookie = ""
 push_key = ""
 
-if(cookie == ""):
-   cookie = input("cookie:")
+if(push_key == ""):
    push_key = input("push:")
 
 
-url = 'https://www.ablesci.com/user/sign'
+login = 'https://www.ablesci.com/site/login?email=597631025@qq.com&password=liumeng1201&remember=on'
+checkin = 'https://www.ablesci.com/user/sign'
 push = 'https://sc.ftqq.com/' + push_key + '.send?text=aihao_checkin_error'
 
 headers = {
@@ -28,8 +27,10 @@ headers = {
 }
 
 
-req = request.Request(url=url, headers=headers, method='GET')
-req.add_header('Cookie', cookie)
+reqlogin = request.Request(url=login, headers=headers, method='GET')
+cookies = request.urlopen(reqlogin).getheader('Set-Cookie')
+req = request.Request(url=checkin, headers=headers, method='GET')
+req.add_header('Cookie', cookies)
 response = request.urlopen(req)
 if response.status == 200:
     print("打卡成功")
