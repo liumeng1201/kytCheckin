@@ -22,10 +22,8 @@ jobs:
         
     - name: Checkin
       run: |
-        cookie='${{ secrets.COOKIE }}'
         push='${{ secrets.PUSHKEY }}'
 
         python3 kyt.py <<EOF
-        ${cookie}
         ${push}
         EOF
