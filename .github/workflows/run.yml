@@ -22,8 +22,10 @@ jobs:
         
     - name: Checkin
       run: |
+        identityfrontendcookie='${{ secrets.IDENTITYFRONTENDCOOKIE }}'
         push='${{ secrets.PUSHKEY }}'
 
         python3 kyt.py <<EOF
+        ${identityfrontendcookie}
         ${push}
         EOF
