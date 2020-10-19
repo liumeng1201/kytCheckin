@@ -10,7 +10,7 @@ if(identity_frontend_cookie == ""):
 
 login = 'https://www.ablesci.com/site/login?email=597631025@qq.com&password=liumeng1201&remember=on'
 checkin = 'https://www.ablesci.com/user/sign'
-push = 'https://sc.ftqq.com/' + push_key + '.send?text=aihao_checkin_error'
+push = 'https://sc.ftqq.com/' + push_key + '.send?text=kyt_checkin_error'
 
 headers = {
     'Host': 'www.ablesci.com',
@@ -35,6 +35,7 @@ security_session_verify_cookie = re.search('security_session_verify=[^;]*;', coo
 advanced_frontend_cookie = re.search('advanced-frontend=[^;]*;', cookies).group()
 _csrf_cookie = re.search('_csrf=[^;]*;', cookies).group()
 cookies = security_session_verify_cookie + advanced_frontend_cookie + _csrf_cookie + identity_frontend_cookie
+print()
 print(cookies)
 req = request.Request(url=checkin, headers=headers, method='GET')
 req.add_header('Cookie', cookies)
