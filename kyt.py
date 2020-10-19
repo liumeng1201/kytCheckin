@@ -8,11 +8,9 @@ if(identity_frontend_cookie == ""):
    identity_frontend_cookie = input("identityfrontendcookie:")
    push_key = input("push:")
 
-
 login = 'https://www.ablesci.com/site/login?email=597631025@qq.com&password=liumeng1201&remember=on'
 checkin = 'https://www.ablesci.com/user/sign'
 push = 'https://sc.ftqq.com/' + push_key + '.send?text=aihao_checkin_error'
-
 
 headers = {
     'Host': 'www.ablesci.com',
