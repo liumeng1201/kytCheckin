@@ -1,5 +1,6 @@
 from urllib import request, parse
 import re
+import time
 
 push_key = ""
 identity_frontend_cookie = ""
@@ -10,7 +11,7 @@ if(identity_frontend_cookie == ""):
 
 login = 'https://www.ablesci.com/site/login?email=597631025@qq.com&password=liumeng1201&remember=on'
 checkin = 'https://www.ablesci.com/user/sign'
-push = 'https://sc.ftqq.com/' + push_key + '.send?text=kyt_checkin_error'
+push = 'https://sc.ftqq.com/' + push_key + '.send?text=need_update_kyt_identity_frontend_cookie'
 
 headers = {
     'Host': 'www.ablesci.com',
@@ -29,6 +30,17 @@ headers = {
 }
 
 
+def day_diff():
+    now = time.strftime("%Y-%m-%d", time.localtime())
+    day1 = time.strptime(str('2020-10-19'), '%Y-%m-%d')
+    day2 = time.strptime(str(now), '%Y-%m-%d')
+    diff = (int(time.mktime(day2)) - int(time.mktime(day1))) / (24 * 60 * 60)
+    day = abs(int(diff))
+    if day > 25:
+        print('need to update identity_frontend_cookie')
+        request.urlopen(push)
+
+
 reqlogin = request.Request(url=login, headers=headers, method='GET')
 cookies = request.urlopen(reqlogin).getheader('Set-Cookie')
 security_session_verify_cookie = re.search('security_session_verify=[^;]*;', cookies).group()
@@ -41,7 +53,7 @@ req = request.Request(url=checkin, headers=headers, method='GET')
 req.add_header('Cookie', cookies)
 response = request.urlopen(req)
 if response.status == 200:
-    print("打卡成功")
+    print("脚本执行成功")
 else:
-    request.urlopen(push)
-    print("打卡失败")
+    print("脚本执行失败")
+day_diff()
