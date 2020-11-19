@@ -35,8 +35,8 @@ def day_diff():
     day1 = time.strptime(str('2020-10-19'), '%Y-%m-%d')
     day2 = time.strptime(str(now), '%Y-%m-%d')
     diff = (int(time.mktime(day2)) - int(time.mktime(day1))) / (24 * 60 * 60)
-    day = abs(int(diff))
-    if day > 25:
+    day = abs(int(diff)) % 26
+    if day == 0:
         print('need to update identity_frontend_cookie')
         request.urlopen(push)
 
